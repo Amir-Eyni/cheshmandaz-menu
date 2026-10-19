@@ -12,9 +12,17 @@ export interface PaymentSectionProps {
 export function PaymentSection({ total, lines }: PaymentSectionProps) {
   const methods = payment.methods as unknown as PaymentMethodId[];
 
+  // Methods that need a non-empty cart stay hidden until the customer adds
+  // something. Filtering before rendering also keeps the separator between
+  // the visible methods only.
+  const visible = methods.filter((id) => {
+    const method = paymentRegistry[id];
+    return !method.requiresItems || total > 0;
+  });
+
   return (
     <section aria-label={fa.payment.sectionTitle} className="mt-6 space-y-4">
-      {methods.map((id, index) => {
+      {visible.map((id, index) => {
         const { Component } = paymentRegistry[id];
         return (
           <div key={id}>

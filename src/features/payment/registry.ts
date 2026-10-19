@@ -4,6 +4,10 @@ import type { PaymentMethod } from "./types";
 import type { PaymentMethodId } from "./types";
 
 export const paymentRegistry: Record<PaymentMethodId, PaymentMethod> = {
-  gatewayLink: { id: "gatewayLink", Component: GatewayLink },
+  gatewayLink: {
+    id: "gatewayLink",
+    Component: GatewayLink,
+    requiresItems: true,
+  },
   cardToCard: { id: "cardToCard", Component: CardToCard },
 };
