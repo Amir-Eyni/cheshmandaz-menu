@@ -1,8 +1,7 @@
 import type { MenuItem } from "@/features/menu/types";
 import { formatThousandToman } from "@/lib/money";
-import { fa } from "@/content/fa";
-import { Button } from "@/components/ui/Button";
 import { Pill } from "@/components/ui/Pill";
+import { QuantityStepper } from "@/features/cart/QuantityStepper";
 
 export interface MenuCardProps {
   item: MenuItem;
@@ -44,36 +43,20 @@ export function MenuCard({ item, qty, onAdd, onRemove }: MenuCardProps) {
 
       <div className="w-8 h-px bg-accent mx-auto mb-2" />
 
-      <div className="flex flex-col items-center gap-2">
-        <div className="flex items-center justify-between w-full">
-          <Pill>{formatThousandToman(item.price)}</Pill>
-          <span className="text-xs text-muted" aria-hidden="true">
-            {item.available === false ? "ناموجود" : "موجود"}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-1 w-full max-w-xs mx-auto">
-          <Button
-            variant="ghost"
-            onClick={onRemove}
-            disabled={isSoldOut || qty === 0}
-            aria-label={fa.aria.remove(item.name)}
-            className="size-10"
-          >
-            −
-          </Button>
-          <span className="w-6 text-center text-sm font-mono">{qty}</span>
-          <Button
-            variant="ghost"
-            onClick={onAdd}
-            disabled={isSoldOut}
-            aria-label={fa.aria.add(item.name)}
-            className="size-10"
-          >
-            +
-          </Button>
-        </div>
+      <div className="flex items-center justify-between w-full">
+        <Pill>{formatThousandToman(item.price)}</Pill>
+        <span className="text-xs text-muted" aria-hidden="true">
+          {item.available === false ? "ناموجود" : "موجود"}
+        </span>
       </div>
+
+      <QuantityStepper
+        name={item.name}
+        qty={qty}
+        onAdd={onAdd}
+        onRemove={onRemove}
+        disabled={isSoldOut}
+      />
 
       {isSoldOut && (
         <div className="absolute inset-0 bg-black/50 rounded-xl flex items-center justify-center">
