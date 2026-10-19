@@ -20,6 +20,17 @@
 }
 
 /*
+ * Every weight renders bold. The utilities (font-medium, font-semibold,
+ * font-bold) read these variables, so redefining them here makes the whole
+ * app bold without touching a single component.
+ */
+@theme {
+  --font-weight-medium: 700;
+  --font-weight-semibold: 700;
+  --font-weight-bold: 700;
+}
+
+/*
  * Minimum touch target. The plan requires 40px for every tap target on
  * mobile, which is larger than the default padding of the small button.
  */
@@ -37,6 +48,8 @@
 
   body {
     margin: 0;
+    /* Bold by default, so text without an explicit weight is bold too. */
+    font-weight: 700;
     /* Keep content clear of notches and the home indicator (viewport-fit=cover). */
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);

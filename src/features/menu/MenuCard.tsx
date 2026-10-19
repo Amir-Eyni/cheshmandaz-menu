@@ -42,15 +42,21 @@ export function MenuCard({ item, qty, onAdd, onRemove }: MenuCardProps) {
         <Pill className="absolute top-2 right-2">{item.badge}</Pill>
       )}
 
-      <h3 className="text-text font-bold text-base mb-1">{item.name}</h3>
+      <span
+        className="absolute top-2 left-2 text-xs text-muted"
+        aria-hidden="true"
+      >
+        {isSoldOut ? fa.menu.soldOut : fa.menu.available}
+      </span>
+
+      <h3 className="text-text font-bold text-lg text-center leading-snug mb-1">
+        {item.name}
+      </h3>
 
       <div className="w-8 h-px bg-accent mx-auto mb-2" />
 
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-center w-full mb-[15px]">
         <Pill>{formatThousandToman(item.price)}</Pill>
-        <span className="text-xs text-muted" aria-hidden="true">
-          {isSoldOut ? fa.menu.soldOut : fa.menu.available}
-        </span>
       </div>
 
       <QuantityStepper

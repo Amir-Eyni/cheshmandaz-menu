@@ -14,10 +14,16 @@ export function PaymentSection({ total, lines }: PaymentSectionProps) {
 
   return (
     <section id="payment" aria-label={fa.payment.sectionTitle} className="mt-6 space-y-4 scroll-mt-4">
-      {methods.map((id) => {
+      {methods.map((id, index) => {
         const { Component } = paymentRegistry[id];
         return (
           <div key={id}>
+            {index > 0 && (
+              <div
+                className="mb-4 border-t border-dashed border-accent/60"
+                aria-hidden="true"
+              />
+            )}
             <Component total={total} lines={lines} />
           </div>
         );

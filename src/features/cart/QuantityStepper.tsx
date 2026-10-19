@@ -17,23 +17,23 @@ export function QuantityStepper({
   disabled,
 }: QuantityStepperProps) {
   return (
-    <div className="flex items-center gap-1 w-full max-w-xs mx-auto">
+    <div className="flex items-center justify-center gap-1 w-full max-w-xs mx-auto">
       <Button
         variant="ghost"
+        size="icon"
         onClick={onRemove}
         disabled={disabled || qty === 0}
         aria-label={fa.aria.remove(name)}
-        size="sm"
       >
         −
       </Button>
-      <span className="w-6 text-center text-sm font-mono">{qty}</span>
+      <span className="w-6 text-center text-base font-mono">{qty}</span>
       <Button
-        variant="ghost"
+        variant="accent"
+        size="icon"
         onClick={onAdd}
         disabled={disabled}
         aria-label={fa.aria.add(name)}
-        size="sm"
       >
         +
       </Button>

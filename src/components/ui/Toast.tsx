@@ -29,16 +29,16 @@ export function Toast({ open, message, onClose }: ToastProps) {
   }
   return (
     <div
-      className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 max-w-xs z-50"
+      className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 max-w-xs z-50 flex flex-col items-center gap-2"
       role="status"
       aria-live="polite"
     >
-      <div className="bg-card border border-border text-text rounded-lg px-4 py-3 shadow-lg">
+      <div className="bg-card border border-border text-text rounded-lg px-4 py-3 shadow-lg text-center">
         {message}
       </div>
       <button
         onClick={() => closeRef.current()}
-        className="mt-2 text-xs text-muted hover:text-text"
+        className="text-xs text-muted hover:text-text"
         aria-label={fa.toast.closeLabel}
       >
         {fa.toast.close}

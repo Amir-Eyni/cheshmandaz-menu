@@ -42,31 +42,31 @@ export function CardToCard({ total }: CardToCardProps) {
 
   return (
     <>
-      <div className="space-y-2">
-        <p className="text-text text-sm">{fa.payment.cardToCard}</p>
-        <div className="ltr text-left">
+      <div className="space-y-3 text-center">
+        <p className="text-text text-base font-semibold">{fa.payment.cardToCard}</p>
+        <div className="ltr text-center">
           <span
             dir="ltr"
-            className="text-lg font-mono text-accent select-text"
+            className="text-xl font-mono text-accent select-text"
             aria-label={payment.cardToCard.cardNumber}
           >
             {formattedCard}
           </span>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2">
           <Button
             onClick={copyCard}
-            disabled={total === 0}
-            variant="ghost"
+            variant="glass"
             size="sm"
+            className="w-full"
           >
             {fa.payment.copyCard}
           </Button>
           <Button
             onClick={copyAmount}
-            disabled={total === 0}
-            variant="ghost"
+            variant="glass"
             size="sm"
+            className="w-full"
           >
             {fa.payment.copyAmount}
           </Button>
