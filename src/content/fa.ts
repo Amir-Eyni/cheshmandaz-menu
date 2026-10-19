@@ -7,7 +7,6 @@ export const fa = {
     empty: "هنوز چیزی انتخاب نشده.",
     total: "جمع کل",
     clear: "پاک‌سازی",
-    continueToPayment: "ادامه به پرداخت",
   },
   payment: {
     sectionTitle: "پرداخت",
