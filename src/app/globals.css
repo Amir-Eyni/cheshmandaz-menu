@@ -44,6 +44,13 @@
     background-color: var(--bg);
     color: var(--text);
     -webkit-text-size-adjust: 100%;
+    /*
+     * Reserve the scrollbar gutter at all times. Without it the vertical
+     * scrollbar appears as soon as the page grows (for example when the cart
+     * panel is mounted) and the whole layout jumps sideways by the width of
+     * the scrollbar.
+     */
+    scrollbar-gutter: stable;
   }
 
   body {

@@ -29,7 +29,7 @@ export default function Page() {
   const emptyHandlers = { onAdd: () => {}, onRemove: () => {} };
 
   return (
-    <main className="min-h-dvh bg-bg text-text relative">
+    <main className="min-h-dvh bg-bg text-text relative overflow-hidden">
       <div
         className="absolute top-0 left-0 w-32 h-32 bg-accent rounded-full -translate-y-1/3 -translate-x-1/6 opacity-30 pointer-events-none"
         aria-hidden="true"
