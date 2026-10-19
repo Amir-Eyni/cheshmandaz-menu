@@ -1,20 +1,22 @@
 import { formatToman } from "@/lib/money";
 import { fa } from "@/content/fa";
 import { useCartStore } from "@/features/cart/store";
-import { buildLines, getTotal } from "@/features/cart/selectors";
+import { buildLines, getTotal, type CartLine } from "@/features/cart/selectors";
 import type { MenuItem } from "@/features/menu/types";
 import { Button } from "@/components/ui/Button";
 
 export interface CartPanelProps {
   menu: MenuItem[];
+  lines?: CartLine[];
+  total?: number;
 }
 
-export function CartPanel({ menu }: CartPanelProps) {
+export function CartPanel({ menu, lines: propsLines, total: propsTotal }: CartPanelProps) {
   const quantities = useCartStore((state) => state.quantities);
   const clear = useCartStore((state) => state.clear);
 
-  const lines = buildLines(quantities, menu);
-  const total = getTotal(lines);
+  const lines = propsLines ?? buildLines(quantities, menu);
+  const total = propsTotal ?? getTotal(lines);
   const isEmpty = lines.length === 0;
 
   return (

@@ -3,12 +3,14 @@ import type { ButtonHTMLAttributes } from "react";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: "primary" | "outline" | "ghost";
+  size?: "sm" | "md";
 }
 
 export function Button({
   children,
   className = "",
   variant = "primary",
+  size = "md",
   disabled,
   ...props
 }: ButtonProps) {
@@ -19,9 +21,13 @@ export function Button({
     outline: "border border-border text-text hover:bg-card disabled:opacity-50 disabled:pointer-events-none",
     ghost: "text-text hover:bg-card disabled:opacity-50 disabled:pointer-events-none",
   };
+  const sizes = {
+    sm: "px-2.5 py-1.5 text-xs",
+    md: "px-4 py-2 text-sm",
+  };
   return (
     <button
-      className={[base, variants[variant], className].filter(Boolean).join(" ")}
+      className={[base, variants[variant], sizes[size], className].filter(Boolean).join(" ")}
       disabled={disabled}
       {...props}
     >

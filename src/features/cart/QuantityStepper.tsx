@@ -23,7 +23,7 @@ export function QuantityStepper({
         onClick={onRemove}
         disabled={disabled || qty === 0}
         aria-label={fa.aria.remove(name)}
-        className="size-10"
+        size="sm"
       >
         −
       </Button>
@@ -33,7 +33,7 @@ export function QuantityStepper({
         onClick={onAdd}
         disabled={disabled}
         aria-label={fa.aria.add(name)}
-        className="size-10"
+        size="sm"
       >
         +
       </Button>

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export interface ToastProps {
   open: boolean;
   message: string;
@@ -5,6 +7,14 @@ export interface ToastProps {
 }
 
 export function Toast({ open, message, onClose }: ToastProps) {
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+    const timer = setTimeout(() => onClose(), 2500);
+    return () => clearTimeout(timer);
+  }, [open, onClose]);
+
   if (!open) {
     return null;
   }

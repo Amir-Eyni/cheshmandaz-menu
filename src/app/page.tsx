@@ -5,7 +5,9 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MenuGrid } from "@/features/menu/MenuGrid";
 import { CartPanel } from "@/features/cart/CartPanel";
+import { PaymentSection } from "@/features/payment/PaymentSection";
 import { useCartStore } from "@/features/cart/store";
+import { buildLines, getTotal } from "@/features/cart/selectors";
 import { menu } from "@/config/menu";
 
 export default function Page() {
@@ -20,6 +22,9 @@ export default function Page() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const lines = buildLines(mounted ? quantities : {}, menu);
+  const total = getTotal(lines);
 
   const emptyHandlers = { onAdd: () => {}, onRemove: () => {} };
 
@@ -36,7 +41,12 @@ export default function Page() {
           onAdd={mounted ? add : emptyHandlers.onAdd}
           onRemove={mounted ? remove : emptyHandlers.onRemove}
         />
-        {mounted && <CartPanel menu={menu} />}
+        {mounted && (
+          <>
+            <CartPanel menu={menu} lines={lines} total={total} />
+            <PaymentSection total={total} lines={lines} />
+          </>
+        )}
         <Footer />
       </div>
     </main>
