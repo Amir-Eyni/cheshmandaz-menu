@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { site, hasCustomSiteUrl } from "@/config/site";
 import { fa } from "@/content/fa";
+import { ToastProvider } from "@/components/ui/ToastProvider";
 import "./globals.css";
 
 const vazirmatn = localFont({
@@ -66,7 +67,9 @@ export default function RootLayout({
       className={vazirmatn.className}
       style={themeVars as unknown as React.CSSProperties}
     >
-      <body className="bg-bg text-text min-h-dvh">{children}</body>
+      <body className="bg-bg text-text min-h-dvh">
+        <ToastProvider>{children}</ToastProvider>
+      </body>
     </html>
   );
 }
