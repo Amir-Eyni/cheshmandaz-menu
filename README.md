@@ -46,6 +46,7 @@ Everything below is a **one-file edit**. No component needs to be touched.
 |---|---|
 | Café name, taglines, footer text | `src/config/site.ts` |
 | Colors | `site.theme` in `src/config/site.ts` |
+| Logo / browser icon (favicon) | `src/app/icon.svg` (colours mirror `site.theme`) |
 | Add, remove or reprice an item | `src/config/menu.ts` |
 | Mark an item as sold out | `available: false` in `src/config/menu.ts` |
 | Add item photos | drop the file in `public/images/menu/`, set `image` in `src/config/menu.ts` |
