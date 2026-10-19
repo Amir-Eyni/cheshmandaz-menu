@@ -1,5 +1,6 @@
 import type { MenuItem } from "@/features/menu/types";
 import { formatThousandToman } from "@/lib/money";
+import { fa } from "@/content/fa";
 import { Pill } from "@/components/ui/Pill";
 import { QuantityStepper } from "@/features/cart/QuantityStepper";
 
@@ -24,6 +25,8 @@ export function MenuCard({ item, qty, onAdd, onRemove }: MenuCardProps) {
         <img
           src={item.image}
           alt={item.name}
+          loading="lazy"
+          decoding="async"
           className="w-full h-20 object-cover rounded-lg mb-2"
         />
       ) : (
@@ -46,7 +49,7 @@ export function MenuCard({ item, qty, onAdd, onRemove }: MenuCardProps) {
       <div className="flex items-center justify-between w-full">
         <Pill>{formatThousandToman(item.price)}</Pill>
         <span className="text-xs text-muted" aria-hidden="true">
-          {item.available === false ? "ناموجود" : "موجود"}
+          {isSoldOut ? fa.menu.soldOut : fa.menu.available}
         </span>
       </div>
 
@@ -61,7 +64,7 @@ export function MenuCard({ item, qty, onAdd, onRemove }: MenuCardProps) {
       {isSoldOut && (
         <div className="absolute inset-0 bg-black/50 rounded-xl flex items-center justify-center">
           <span className="text-accent font-bold text-xs uppercase tracking-widest">
-            فروخته شده
+            {fa.menu.soldOutOverlay}
           </span>
         </div>
       )}

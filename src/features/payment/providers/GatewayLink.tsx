@@ -19,7 +19,7 @@ export function GatewayLink({ total }: GatewayLinkProps) {
     message: "",
   });
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (total <= 0) {
       return;
     }
@@ -28,8 +28,11 @@ export function GatewayLink({ total }: GatewayLinkProps) {
       return;
     }
     if (payment.gatewayLink.copyAmountBeforeRedirect) {
-      copyText(String(total));
-      setToast({ open: true, message: fa.toast.amountCopied });
+      const copied = await copyText(String(total));
+      setToast({
+        open: true,
+        message: copied ? fa.toast.amountCopied : fa.toast.copyFailed,
+      });
     }
     window.open(payment.gatewayLink.url, "_blank");
   };
@@ -38,7 +41,7 @@ export function GatewayLink({ total }: GatewayLinkProps) {
     <>
       <Button
         onClick={handleClick}
-        disabled={total === 0 || !payment.gatewayLink.url}
+        disabled={total === 0}
         variant="primary"
         className="w-full"
       >

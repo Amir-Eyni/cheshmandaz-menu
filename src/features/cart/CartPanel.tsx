@@ -19,6 +19,12 @@ export function CartPanel({ menu, lines: propsLines, total: propsTotal }: CartPa
   const total = propsTotal ?? getTotal(lines);
   const isEmpty = lines.length === 0;
 
+  const scrollToPayment = () => {
+    document
+      .getElementById("payment")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <section className={["cart-panel", isEmpty ? "hidden" : ""].join(" ")}>
       <h2 className="text-text font-bold text-lg mb-3">{fa.cart.title}</h2>
@@ -44,7 +50,7 @@ export function CartPanel({ menu, lines: propsLines, total: propsTotal }: CartPa
         ))}
       </ul>
 
-      <div className="bg-accent text-on-accent rounded-lg p-3">
+      <div className="bg-accent text-on-accent rounded-lg p-3" aria-live="polite">
         <div className="flex justify-between mb-1">
           <span className="font-bold">{fa.cart.total}</span>
           <span className="font-bold">{formatToman(total)}</span>
@@ -58,15 +64,15 @@ export function CartPanel({ menu, lines: propsLines, total: propsTotal }: CartPa
           disabled={isEmpty}
           className="w-full sm:w-1/2"
         >
-          پاک‌سازی
+          {fa.cart.clear}
         </Button>
         <Button
-          onClick={() => {}}
+          onClick={scrollToPayment}
           variant="primary"
           disabled={isEmpty}
           className="w-full sm:w-1/2"
         >
-          ادامه به پرداخت
+          {fa.cart.continueToPayment}
         </Button>
       </div>
     </section>

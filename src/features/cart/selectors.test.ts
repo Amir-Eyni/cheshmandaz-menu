@@ -50,6 +50,25 @@ describe("buildLines", () => {
   test("returns empty when only unavailable items remain", () => {
     expect(buildLines({ sold: 3 }, menu)).toEqual([]);
   });
+
+  test("never produces a negative quantity", () => {
+    expect(buildLines({ tea: -3 }, menu)).toEqual([]);
+  });
+
+  test("drops zero quantities", () => {
+    expect(buildLines({ tea: 0 }, menu)).toEqual([]);
+  });
+
+  test("floors fractional quantities", () => {
+    const lines = buildLines({ tea: 2.7 }, menu);
+    expect(lines[0].qty).toBe(2);
+    expect(lines[0].subtotal).toBe(70000);
+  });
+
+  test("ignores non-finite quantities", () => {
+    expect(buildLines({ tea: Number.NaN }, menu)).toEqual([]);
+    expect(buildLines({ tea: Number.POSITIVE_INFINITY }, menu)).toEqual([]);
+  });
 });
 
 describe("getTotal", () => {

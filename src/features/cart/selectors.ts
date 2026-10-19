@@ -6,6 +6,15 @@ export type CartLine = {
   subtotal: number;
 };
 
+/**
+ * Builds the cart lines from the persisted quantities and the current menu.
+ *
+ * Quantities come from sessionStorage and therefore cannot be trusted:
+ * negative, fractional or non-finite values are clamped here, and lines
+ * that end up empty are dropped. Ids that are unknown to the menu or that
+ * belong to an unavailable item are ignored as well, so a cart persisted
+ * before a menu change never breaks the page.
+ */
 export function buildLines(
   q: Record<string, number>,
   menu: MenuItem[]
@@ -18,8 +27,10 @@ export function buildLines(
     })
     .map(([id, qty]) => {
       const item = byId.get(id)!;
-      return { item, qty, subtotal: item.price * qty };
-    });
+      const safeQty = Number.isFinite(qty) ? Math.max(0, Math.floor(qty)) : 0;
+      return { item, qty: safeQty, subtotal: item.price * safeQty };
+    })
+    .filter((line) => line.qty > 0);
 }
 
 export function getTotal(lines: CartLine[]): number {

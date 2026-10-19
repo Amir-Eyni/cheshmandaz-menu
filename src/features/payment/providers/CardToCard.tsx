@@ -25,13 +25,19 @@ export function CardToCard({ total }: CardToCardProps) {
   );
 
   const copyCard = async () => {
-    await copyText(payment.cardToCard.cardNumber);
-    setToast({ open: true, message: fa.toast.cardCopied });
+    const copied = await copyText(payment.cardToCard.cardNumber);
+    setToast({
+      open: true,
+      message: copied ? fa.toast.cardCopied : fa.toast.copyFailed,
+    });
   };
 
   const copyAmount = async () => {
-    await copyText(String(total));
-    setToast({ open: true, message: fa.toast.amountCopied });
+    const copied = await copyText(String(total));
+    setToast({
+      open: true,
+      message: copied ? fa.toast.amountCopied : fa.toast.copyFailed,
+    });
   };
 
   return (

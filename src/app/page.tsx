@@ -29,12 +29,12 @@ export default function Page() {
   const emptyHandlers = { onAdd: () => {}, onRemove: () => {} };
 
   return (
-    <main className="min-h-screen bg-bg text-text relative">
+    <main className="min-h-dvh bg-bg text-text relative">
       <div
         className="absolute top-0 left-0 w-32 h-32 bg-accent rounded-full -translate-y-1/3 -translate-x-1/6 opacity-30 pointer-events-none"
         aria-hidden="true"
       />
-      <div className="max-w-[480px] mx-auto w-full px-4 py-6 min-h-screen">
+      <div className="max-w-[480px] mx-auto w-full px-4 py-6 min-h-dvh">
         <Header />
         <MenuGrid
           quantities={mounted ? quantities : {}}

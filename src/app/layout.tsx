@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { site } from "@/config/site";
+import { site, hasCustomSiteUrl } from "@/config/site";
+import { fa } from "@/content/fa";
+import "./globals.css";
 
 const vazirmatn = localFont({
   src: [
@@ -16,7 +18,30 @@ const vazirmatn = localFont({
 
 export const metadata: Metadata = {
   title: site.name,
-  description: "فهرست الطعامی کافه",
+  description: fa.meta.description,
+  applicationName: site.name,
+  ...(hasCustomSiteUrl
+    ? {
+        alternates: { canonical: site.url },
+        openGraph: {
+          title: site.name,
+          description: fa.meta.description,
+          url: site.url,
+          siteName: site.name,
+          locale: "fa_IR",
+          type: "website",
+        },
+      }
+    : {}),
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // Allow zooming (accessibility) but stop iOS from zooming on input focus.
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: site.theme.bg,
 };
 
 export default function RootLayout({
@@ -41,7 +66,7 @@ export default function RootLayout({
       className={vazirmatn.className}
       style={themeVars as unknown as React.CSSProperties}
     >
-      <body className="bg-bg text-text min-h-screen">{children}</body>
+      <body className="bg-bg text-text min-h-dvh">{children}</body>
     </html>
   );
 }
