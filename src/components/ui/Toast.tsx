@@ -68,7 +68,7 @@ export function Toast({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center px-4 pointer-events-none"
+      className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-[max(1rem,env(safe-area-inset-top))] pointer-events-none"
       role="status"
       aria-live="polite"
     >
